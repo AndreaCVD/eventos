@@ -25,7 +25,10 @@ Route::get('/dashboard', function () {
 
 Route::group(['prefix' => 'events'], function(){
     Route::get('', [EventController::class, 'index']) -> name('index');
+    Route::get('create', [EventController::class, 'create']) -> name('create');
 });
+
+Route::post('create',[EventController::class, 'store']) -> name('store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

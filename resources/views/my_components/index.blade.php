@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Eventos index') }}
+            {{ __('All events') }}
         </h2>
     </x-slot>
 
@@ -14,27 +14,31 @@
                     <thead>
                         <tr>
                             <th>Title:</th>
-                            <th>Author:</th>
-                            <th>Description:</th>
                             <th>Location:</th>
                             <th>Date:</th>
-                            <th>user_id:</th>
-                            <th>created_at:</th>
-                            <th>updated_at:</th>
+                            <th></th>
+
                         </tr>
                     </thead>
 
                     @foreach($events as $event)
                     <tbody>
                         <tr>
-                            <td>{{$event->id}}</td>
                             <td>{{$event->title}}</td>
-                            <td>{{$event->description}}</td>
                             <td>{{$event->location}}</td>
                             <td>{{$event->date}}</td>
-                            <td>{{$event->user_id}}</td>
-                            <td>{{$event->created_at}}</td>
-                            <td>{{$event->updated_at}}</td>
+<!-- 
+                            @foreach($users as $user)
+                                @if($event->user_id == $user->id)
+                                    <td>{{$user->name}}</td>
+                                @endif
+                            @endforeach -->
+
+                            <td class="d-flex justify-content-end pe-4">
+                                <a href="">
+                                    <button class="btn btn-primary">+Info</button>
+                                </a>    
+                            </td>
                         </tr>
                     </tbody>
                     @endforeach
