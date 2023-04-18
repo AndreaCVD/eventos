@@ -26,6 +26,7 @@ Route::get('/dashboard', function () {
 Route::group(['prefix' => 'events'], function(){
     Route::get('', [EventController::class, 'index']) -> name('index');
     Route::get('create', [EventController::class, 'create']) -> name('create');
+    Route::get('{id}', [EventController::class, 'show']) -> name('show');
 });
 
 Route::post('create',[EventController::class, 'store']) -> name('store');

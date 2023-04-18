@@ -40,4 +40,18 @@ class EventController extends Controller
 
         return redirect('/dashboard');
     }
+
+    public function show($id){
+
+        $event = Event::find($id);
+        // dd($event);
+
+        $userOwner = $event->user_id;
+        // dd($userOwner);
+
+        $owner = User::find($userOwner);
+
+        return view('my_components.show', ['event' => $event, 'owner' => $owner]);
+
+    }
 }

@@ -35,9 +35,9 @@
                             @endforeach -->
 
                             <td class="d-flex justify-content-end pe-4">
-                                <a href="">
+                                <a href="/events/{{$event->id}}">
                                     <button class="btn btn-primary">+Info</button>
-                                </a>    
+                                </a>
                             </td>
                         </tr>
                     </tbody>
