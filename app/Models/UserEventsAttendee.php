@@ -10,11 +10,12 @@ class UserEventsAttendee extends Model
     use HasFactory;
 
     public function user(){
-        return $this->belongsTo('\App\User','user_id')
-        ->withPivot('id');
+        return $this->belongsTo(User::class,'user_id');
+        // return $this->belongsTo('\App\User','user_id')
+        // ->withPivot('id');
     }
 
     public function event(){
-        return $this->belongsTo('\App\Event','id');
+        return $this->belongsTo(Event::class,'id');
     }
 }
