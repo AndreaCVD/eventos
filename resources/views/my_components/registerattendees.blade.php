@@ -9,14 +9,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
-                <form class="container-fluid p-3" action="" method="POST">
+                <form class="container-fluid p-3" action="{{ route('attendees.store', $event->id ) }}" method="POST">
                     @csrf
+                    @method("PUT")
 
                     <div class="row p-0 m-0 justify-content-between align-items-center">
 
                         <div class="col-5">
                             <label class="form-label">Users to register:</label>
-                            <select class="form-select w-100" aria-label="Default select example" multiple>
+                            <select class="form-select w-100" aria-label="Default select example" name="attendees">
 
                                 @foreach($users as $user)
 

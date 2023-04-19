@@ -35,6 +35,7 @@ Route::group(['prefix' => 'events'], function(){
 
 Route::post('create',[EventController::class, 'store']) -> name('store');
 Route::put('events/{idevent}', [EventController::class, 'update']) -> name('event.update');
+Route::put('events/{id}/attendees', [EventController::class, 'storeAttendee']) -> name('attendees.store');
 
 
 

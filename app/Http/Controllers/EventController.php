@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\User;
+use App\Models\UserEventAttendee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -59,7 +59,11 @@ class EventController extends Controller
 
         $owner = User::find($userOwner);
 
-        return view('my_components.show', ['event' => $event, 'owner' => $owner]);
+        $users = User::all();
+
+        $participants = UserEventAttendee::where('event_id', $id)->get();
+
+        return view('my_components.show', ['event' => $event, 'owner' => $owner, 'participants' => $participants, 'users' => $users]);
 
     }
 
@@ -97,5 +101,18 @@ class EventController extends Controller
 
 
         return view('my_components.registerattendees', ['event' => $event, 'users' => $users]);
+    }
+
+    public function storeAttendee($idEvent, Request $request){
+        // dd($request->get('attendees'));
+
+        $model = new UserEventAttendee();
+
+        $model->user_id = $request->get('attendees');
+        $model->event_id = $idEvent;
+
+        $model->save();
+
+        return redirect('/dashboard');
     }
 }

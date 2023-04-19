@@ -37,6 +37,21 @@
                             <input type="text" class="form-control" id="floatingUser" disabled value="{{$owner->name}}">
                             <label class="form-label" for="floatingUser">Owner</label>
                         </div>
+
+                        <div class="col-lg-5 mb-3 p-0">
+                            <label class="form-label" for="floatingUser">Attendees:</label>
+
+                            <ul>
+                                @foreach($users as $user)
+                                    @foreach($participants as $participant)
+                                        @if($participant->user_id == $user->id)
+                                            <li>{{$user->name}}</li>
+                                        @endif
+                                    @endforeach
+                                @endforeach   
+                            </ul>
+
+                        </div>
                     </div>
 
                     <div class="row mt-4 justify-content-center">
