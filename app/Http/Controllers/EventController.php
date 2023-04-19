@@ -21,6 +21,14 @@ class EventController extends Controller
         return view('my_components.index', ['events' => $events, 'users' => $users]);
     }
 
+    public function myIndex(){
+        $events = Event::where('user_id', Auth::user()->id)->get();
+        
+        // dd($events);
+
+        return view('my_components.myevents', ['events' => $events]);
+    }
+
     public function create(){
         return view('my_components.create');
     }
@@ -53,5 +61,41 @@ class EventController extends Controller
 
         return view('my_components.show', ['event' => $event, 'owner' => $owner]);
 
+    }
+
+    public function edit($id){
+        $event = Event::find($id);
+
+        $userOwner = $event->user_id;
+        // dd($userOwner);
+
+        $owner = User::find($userOwner);
+
+        return view('my_components.edit', ['event' => $event, 'owner' => $owner]);
+    }
+
+    public function update(Request $request, int $id){
+        // dd($request->get('location'));
+
+        $event = Event::find($id);
+
+        $event->title = $request->get('title');
+        $event->description = $request->get('description');
+        $event->location = $request->get('location');
+        $event->date = $request->get('date');
+
+        $event->save();
+
+        return redirect('events/myevents');
+    }
+
+    public function register($id){
+        
+        $event = Event::find($id);
+
+        $users = User::all();
+
+
+        return view('my_components.registerattendees', ['event' => $event, 'users' => $users]);
     }
 }

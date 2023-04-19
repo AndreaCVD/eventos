@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('All events') }}
+            {{ __('My events') }}
         </h2>
     </x-slot>
 
@@ -28,19 +28,12 @@
                             <td>{{$event->title}}</td>
                             <td>{{$event->location}}</td>
                             <td>{{$event->date}}</td>
+                            <td>{{Auth::user()->name}}</td>
 
-                            @foreach($users as $user)
-                                @if($event->user_id == $user->id)
-                                    <td>{{$user->name}}</td>
-                                @endif
-                            @endforeach
 
                             <td class="d-flex justify-content-end pe-4">
                                 <a href="/events/{{$event->id}}">
-                                    <button class="btn btn-info">+Info</button>
-                                </a>
-                                <a href="/events/{{$event->id}}/register" class="ms-2">
-                                    <button class="btn btn-primary">Register</button>
+                                    <button class="btn btn-primary">+Info</button>
                                 </a>
                             </td>
                         </tr>

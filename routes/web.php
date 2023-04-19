@@ -19,17 +19,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/dashboard', function () { return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 Route::group(['prefix' => 'events'], function(){
     Route::get('', [EventController::class, 'index']) -> name('index');
+    Route::get('myevents', [EventController::class, 'myIndex']) -> name('myIndex');
     Route::get('create', [EventController::class, 'create']) -> name('create');
-    Route::get('{id}', [EventController::class, 'show']) -> name('show');
+    Route::get('/{id}/edit', [EventController::class, 'edit']) -> name('edit');
+    Route::get('/{id}/register', [EventController::class, 'register']) -> name('attendees.register');
+    Route::get('/{id}', [EventController::class, 'show']) -> name('show');
 });
 
 Route::post('create',[EventController::class, 'store']) -> name('store');
+Route::put('events/{idevent}', [EventController::class, 'update']) -> name('event.update');
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

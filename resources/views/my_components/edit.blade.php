@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create new event') }}
+            Edit: {{$event->title}}
         </h2>
     </x-slot>
 
@@ -10,13 +10,17 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                 <form class="container-fluid p-3"
-                    action="{{route('store')}}" method="POST">
+                    action="{{ route('event.update', $event->id ) }}" method="POST">
+                    @csrf
+                    @method("PUT")
 
                     <div class="row p-0 m-0 justify-content-between">
+          
                         <!-- Europe -->
                         <!-- Country names and Country Name -->
                         <select class="form-select mb-3 py-3" id="location" name="location">
-                            <option value="" selected disabled>Location:</option>
+                            <option value="{{$event->location}}" selected hidden>{{$event->location}}</option>
+                            <option value="" disabled>Location:</option>
                             <option value="Aland Islands">Aland Islands</option>
                             <option value="Albania">Albania</option>
                             <option value="Andorra">Andorra</option>
@@ -72,17 +76,17 @@
                         </select>
 
                         <div class="form-floating mb-3 p-0">
-                            <input type="text" class="form-control" id="floatingTitle" placeholder="input" name="title">
+                            <input type="text" class="form-control" id="floatingTitle" placeholder="input" name="title" value="{{$event->title}}">
                             <label class="form-label" for="floatingTitle">Event title:</label>
                         </div>
 
                         <div class="form-floating mb-3 p-0">
-                            <textarea type="text" class="form-control" id="floatingDescription" placeholder="input" rows="3" name="description"></textarea>
+                            <textarea type="text" class="form-control" id="floatingDescription" placeholder="input" rows="3" name="description"> {{$event->description}} </textarea>
                             <label class="form-label" for="floatingDescription">Description of the event:</label>
                         </div>
 
                         <div class="col-lg-5 form-floating mb-3 p-0">
-                            <input type="datetime-local" class="form-control" id="floatingDate" placeholder="input" name="date">
+                            <input type="datetime-local" class="form-control" id="floatingDate" placeholder="input" name="date" value="{{$event->date}}">
                             <label class="form-label" for="floatingDate">Date of the event</label>
                         </div>
 
@@ -92,9 +96,8 @@
                         </div>
                     </div>
 
-                    <div class="row mt-4 justify-content-center">
-                        @csrf    
-                        <button type="submit" class="col-3 btn btn-light">Create event</button>
+                    <div class="row mt-4 justify-content-center"> 
+                        <button type="submit" class="col-3 btn btn-warning">Save event</button>
                     </div>
 
                 </form>

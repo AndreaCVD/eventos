@@ -21,7 +21,7 @@
                     <button class="btn btn-outline-dark" style="width: 120px; height:120px">All Events</button>
                 </a>
 
-                <a href="/events" style="width: 120px; height:120px">
+                <a href="/events/myevents" style="width: 120px; height:120px">
                     <button class="btn btn-outline-dark" style="width: 120px; height:120px">My Events</button>
                 </a>
 
